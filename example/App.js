@@ -35,10 +35,8 @@ export default () => {
   const newMnemonic = async () => {
     try {
       const mnemonic = await WalletSdk.NewMnemonic(256);
-      console.log('生成助记词:', mnemonic);
       setMnemonic(`生成助记词--成功：${mnemonic}`);
     } catch (err) {
-      console.log('生成助记词失败:', err);
       setErrors(`生成助记词--失败: ${err.message}`);
     }
   };
