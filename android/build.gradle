@@ -71,6 +71,7 @@ repositories {
 }
 
 dependencies {
+    implementation project(":wallet")
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
 }

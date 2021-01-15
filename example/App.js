@@ -24,40 +24,26 @@ export default () => {
   const [mnemonic, setMnemonic] = useState('');
   const [seed, setSeed] = useState('');
   const [wallet, setWallet] = useState('');
-  const [nodeUrl, setNodeUrl] = useState('');
   const [sNodeUrl, setSNodeUrl] = useState('');
   const [address, setAddress] = useState('');
   const [privateKey, setPrivateKey] = useState('');
   const [signResult, setSignResult] = useState('');
   const [txID, setTxID] = useState('');
 
-  // 生成助记词
-  const newMnemonic = async () => {
-    try {
-      const mnemonic = await WalletSdk.NewMnemonic(256);
-      setMnemonic(`生成助记词--成功：${mnemonic}`);
-    } catch (err) {
-      setErrors(`生成助记词--失败: ${err.message}`);
-    }
-  };
-
-  const TestPay = () => {
-    // TestEth()
-    TestFil()
-  }
-
   const TestEth = async () => {
-    const mnemonic =
-      'distance maze layer winter day perfect sport toast flame square body explain chair magic simple page indicate december middle kite suffer spot civil chair';
+    // const mnemonic =
+    //   'distance maze layer winter day perfect sport toast flame square body explain chair magic simple page indicate december middle kite suffer spot civil chair';
     const password = '123456';
 
     try {
+      const mnemonic = await WalletSdk.NewMnemonic(256);
+      setMnemonic(`生成助记词--成功：${mnemonic}`);
+
       const sseed = await WalletSdk.NewSeed(mnemonic, password); // 通过助记词和密码口令生成钱包种子
       setSeed(`生成钱包种子--成功: ${sseed}`);
-      console.log('成钱包种子:::::',sseed)
 
-      await WalletSdk.NewWallet(sseed);
-      setWallet(`创建钱包--成功:${wallet}`);
+      const res = await WalletSdk.NewWallet(sseed);
+      setWallet(`创建钱包--成功:${res}`);
 
       await WalletSdk.SetNodeUrl('eth', 'https://goerli.infura.io/v3/2595bb2d19014600baa03e51723f75e0');
       setSNodeUrl('钱包设置节点url--成功');
@@ -86,11 +72,14 @@ export default () => {
     }
   };
   const TestFil = async () => {
-    const mnemonic =
-      'distance maze layer winter day perfect sport toast flame square body explain chair magic simple page indicate december middle kite suffer spot civil chair';
+    // const mnemonic =
+    //   'distance maze layer winter day perfect sport toast flame square body explain chair magic simple page indicate december middle kite suffer spot civil chair';
     const password = '123456';
 
     try {
+      const mnemonic = await WalletSdk.NewMnemonic(256);
+      setMnemonic(`生成助记词--成功：${mnemonic}`);
+      
       const sseed = await WalletSdk.NewSeed(mnemonic, password); // 通过助记词和密码口令生成钱包种子
       setSeed(`生成钱包种子--成功: ${sseed}`);
 
@@ -100,23 +89,27 @@ export default () => {
       await WalletSdk.SetHttpPublicKeysPath('filecoin', "/Users/zhangzhenyang/Downloads/PublicKey.pem");
       setAddress(`SetHttpPublicKeysPath--成功`);
 
-      await WalletSdk.SetNodeUrl('filecoin', 'http://127.0.0.1:9876');
+      await WalletSdk.SetNodeUrl('filecoin', 'http://192.168.3.9:9876');
       setSNodeUrl('钱包设置节点url--成功');
 
-      // const addr = await WalletSdk.DeriveAddress('eth', 1);
-      // setAddress(`推导地址--成功: ${addr}`);
+      const addr = await WalletSdk.DeriveAddress('filecoin', 1);
+      setAddress(`推导地址--成功: ${addr}`);
 
-      // const privateKey = await WalletSdk.ExportAddressPrivateKey('eth', 1);
-      // setPrivateKey(`导出账户私钥--成功: ${privateKey}`);
+      const privateKey = await WalletSdk.ExportAddressPrivateKey('eth', 1);
+      setPrivateKey(`导出账户私钥--成功: ${privateKey}`);
 
       const signResult = await WalletSdk.Sign('filecoin', 0,JSON.stringify({
-        To:       "",
-        Amount:   0.01,
+        To:         "f1tapcyapyaq6icvqkceztm7wgte5pv7bnqibxz7q",
+        Amount:     0.01,
+        GasPrice:   1,
+        GasLimit:   266363,
+        GasPremium: 1,
+        GasFeeCap:  1000,
       }));
       setSignResult(`签名后的数据: ${signResult}`);
 
-      const txID = await WalletSdk.Broadcast('filecoin', signResult);
-      setTxID(`钱包广播交易--成功: ${txID}`);
+      // const txID = await WalletSdk.Broadcast('filecoin', signResult);
+      // setTxID(`钱包广播交易--成功: ${txID}`);
 
     } catch (err) {
       console.log('TestPay error:', err.toString());
@@ -128,21 +121,21 @@ export default () => {
     <View style={styles.container}>
       <ScrollView style={{flex: 1}}>
         <View style={styles.wrap}>
-          <TouchableOpacity style={styles.btn} onPress={newMnemonic}>
-            <Text style={styles.btn_text}>生成助记词</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.btn} onPress={TestPay}>
-            <Text style={styles.btn_text}>TestPay</Text>
-          </TouchableOpacity>
+          <View style={styles.btnGroup}>
+            <TouchableOpacity style={styles.btn} onPress={TestEth}>
+              <Text style={styles.btn_text}>eth 测试</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn} onPress={TestFil}>
+              <Text style={styles.btn_text}>filecoin 测试</Text>
+            </TouchableOpacity>
+          </View>
 
           <Text style={{marginVertical: 10, textAlign: 'center'}}>
-            --Success--
+            --测试结果--
           </Text>
           <Text style={styles.response}>{mnemonic}</Text>
           <Text style={styles.response}>{seed}</Text>
           <Text style={styles.response}>{wallet}</Text>
-          <Text style={styles.response}>{nodeUrl}</Text>
           <Text style={styles.response}>{sNodeUrl}</Text>
           <Text style={styles.response}>{address}</Text>
           <Text style={styles.response}>{privateKey}</Text>
@@ -150,7 +143,7 @@ export default () => {
           <Text style={styles.response}>{txID}</Text>
 
           <Text style={{marginVertical: 10, textAlign: 'center'}}>
-            --Errors--
+            --错误信息--
           </Text>
           <Text style={styles.response}>{errors}</Text>
         </View>
@@ -163,22 +156,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop:60
+    paddingTop:40
   },
   wrap: {
     padding: 20,
   },
+  btnGroup: {
+    flexDirection:'row',
+    alignItems:"center",
+    justifyContent:"space-around",
+    marginBottom: 10,
+  },
   btn: {
     height: 46,
+    flex:1,
     backgroundColor: '#0096fa',
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    marginHorizontal:5
   },
   btn_text: {
     color: '#fff',
     fontSize: 18,
   },
-  response: {},
+  response: {
+    marginBottom:10
+  },
 });

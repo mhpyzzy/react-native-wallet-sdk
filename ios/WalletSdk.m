@@ -7,11 +7,6 @@ WalletWallet *wallet = nil;
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(sampleMethod:(NSString *)stringArgument numberParameter:(nonnull NSNumber *)numberArgument callback:(RCTResponseSenderBlock)callback)
-{
-    // TODO: Implement some actually useful functionality
-    callback(@[[NSString stringWithFormat: @"numberArgument: %@ stringadfasdasdfArgument: %@", numberArgument, stringArgument]]);
-}
 
 // 通过1228-256字节的熵值创建返回一个随机生成的BIP-39助记词
 RCT_EXPORT_METHOD(NewMnemonic:(int) bits resolver:(RCTPromiseResolveBlock)resolve
