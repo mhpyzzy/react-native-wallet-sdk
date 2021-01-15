@@ -2,7 +2,7 @@
   "name": "react-native-wallet-sdk",
   "title": "React Native Wallet Sdk",
   "version": "1.0.0",
-  "description": "TODO",
+  "description": "HD wallet SDK for react-native",
   "main": "index.js",
   "files": [
     "README.md",
@@ -23,8 +23,8 @@
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "zhang zhen yang",
+    "email": "41921926@qq.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",

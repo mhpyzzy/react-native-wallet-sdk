@@ -1,6 +1,6 @@
 # react-native-wallet-sdk
 
-## 安装
+## yarn (npm) 安装
 
 `yarn add react-native-wallet-sdk`
 
@@ -8,13 +8,15 @@
 ```
   $ cd ios
   $ pod install
-
 ```
-### android 
+### android  
 ```
 android studio导入 wallet.aar: 
 File --> New --> New Module --> 选择 import .JAR/.ARR Package
 ```
+
+
+
 
 ## 使用
 ```javascript
