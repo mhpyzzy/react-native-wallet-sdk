@@ -108,8 +108,8 @@ export default () => {
       }));
       setSignResult(`签名后的数据: ${signResult}`);
 
-      // const txID = await WalletSdk.Broadcast('filecoin', signResult);
-      // setTxID(`钱包广播交易--成功: ${txID}`);
+      const txID = await WalletSdk.Broadcast('filecoin', signResult);
+      setTxID(`钱包广播交易--成功: ${txID}`);
 
     } catch (err) {
       console.log('TestPay error:', err.toString());

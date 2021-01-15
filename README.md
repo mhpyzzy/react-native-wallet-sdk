@@ -4,6 +4,17 @@
 
 `yarn add react-native-wallet-sdk`
 
+### ios
+```
+  $ cd ios
+  $ pod install
+
+```
+### android 
+```
+android studio导入 wallet.aar: 
+File --> New --> New Module --> 选择 import .JAR/.ARR Package
+```
 
 ## 使用
 ```javascript
