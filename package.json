@@ -16,8 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-wallet-sdk.git",
-    "baseUrl": "https://github.com/github_account/react-native-wallet-sdk"
+    "url": "git+https://github.com/mhpyzzy/react-native-wallet-sdk.git",
+    "baseUrl": "https://github.com/mhpyzzy/react-native-wallet-sdk"
   },
   "keywords": [
     "react-native"

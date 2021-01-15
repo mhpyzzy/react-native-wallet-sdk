@@ -9,14 +9,14 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   react-native-wallet-sdk
                    DESC
-  s.homepage     = "https://github.com/github_account/react-native-wallet-sdk"
+  s.homepage     = "https://github.com/mhpyzzy/react-native-wallet-sdk"
   # brief license entry:
   s.license      = "MIT"
   # optional - use expanded license entry instead:
   # s.license    = { :type => "MIT", :file => "LICENSE" }
   s.authors      = { "zhangzhenyang" => "41921926@qq.com" }
   s.platforms    = { :ios => "9.0" }
-  s.source       = { :git => "https://github.com/github_account/react-native-wallet-sdk.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/mhpyzzy/react-native-wallet-sdk.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,c,m,swift}"
   s.requires_arc = true
