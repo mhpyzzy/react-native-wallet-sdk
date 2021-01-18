@@ -30,55 +30,14 @@ export default () => {
   const [signResult, setSignResult] = useState('');
   const [txID, setTxID] = useState('');
 
-  const TestEth = async () => {
-    // const mnemonic =
-    //   'distance maze layer winter day perfect sport toast flame square body explain chair magic simple page indicate december middle kite suffer spot civil chair';
-    const password = '123456';
-
-    try {
-      const mnemonic = await WalletSdk.NewMnemonic(256);
-      setMnemonic(`生成助记词--成功：${mnemonic}`);
-
-      const sseed = await WalletSdk.NewSeed(mnemonic, password); // 通过助记词和密码口令生成钱包种子
-      setSeed(`生成钱包种子--成功: ${sseed}`);
-
-      const res = await WalletSdk.NewWallet(sseed);
-      setWallet(`创建钱包--成功:${res}`);
-
-      await WalletSdk.SetNodeUrl('eth', 'https://goerli.infura.io/v3/2595bb2d19014600baa03e51723f75e0');
-      setSNodeUrl('钱包设置节点url--成功');
-
-      const addr = await WalletSdk.DeriveAddress('eth', 1);
-      setAddress(`推导地址--成功: ${addr}`);
-
-      const privateKey = await WalletSdk.ExportAddressPrivateKey('eth', 1);
-      setPrivateKey(`导出账户私钥--成功: ${privateKey}`);
-
-      const signResult = await WalletSdk.Sign('eth', 1,JSON.stringify({
-        To:       "0x2FA0b43f9e22CE9d77ef9DA09D71f3e64c4AA8Db",
-        Amount:   0.5,
-        GasPrice: 21,
-        GasLimit: 21000,
-        Nonce:    1,
-      }));
-      setSignResult(`签名后的数据: ${signResult}`);
-
-      const txID = await WalletSdk.Broadcast('eth', signResult);
-      setTxID(`钱包广播交易--成功: ${txID}`);
-
-    } catch (err) {
-      console.log('TestPay error:', err.toString());
-      setErrors(`Pay Error: ${err.message}`);
-    }
-  };
   const TestFil = async () => {
-    // const mnemonic =
-    //   'distance maze layer winter day perfect sport toast flame square body explain chair magic simple page indicate december middle kite suffer spot civil chair';
-    const password = '123456';
+    const mnemonic =
+      'pumpkin whip saddle sunset clog original pencil ready noodle kite wreck riot gather shoe need rough choice parade report empty submit can apart quick';
+    const password = '';
 
     try {
-      const mnemonic = await WalletSdk.NewMnemonic(256);
-      setMnemonic(`生成助记词--成功：${mnemonic}`);
+      // const mnemonic = await WalletSdk.NewMnemonic(256);
+      // setMnemonic(`生成助记词--成功：${mnemonic}`);
       
       const sseed = await WalletSdk.NewSeed(mnemonic, password); // 通过助记词和密码口令生成钱包种子
       setSeed(`生成钱包种子--成功: ${sseed}`);
@@ -86,16 +45,16 @@ export default () => {
       await WalletSdk.NewWallet(sseed);
       setWallet(`创建钱包--成功:${wallet}`);
 
-      await WalletSdk.SetHttpPublicKeysPath('filecoin', "/Users/zhangzhenyang/Downloads/PublicKey.pem");
-      setAddress(`SetHttpPublicKeysPath--成功`);
+      await WalletSdk.SetHttpPublicKeysPath('filecoin', "/Users/xxx/Downloads/PublicKey.pem");
+      console.log(`SetHttpPublicKeysPath--成功`);
 
       await WalletSdk.SetNodeUrl('filecoin', 'http://192.168.3.9:9876');
       setSNodeUrl('钱包设置节点url--成功');
 
-      const addr = await WalletSdk.DeriveAddress('filecoin', 1);
+      const addr = await WalletSdk.DeriveAddress('filecoin', 0);
       setAddress(`推导地址--成功: ${addr}`);
 
-      const privateKey = await WalletSdk.ExportAddressPrivateKey('eth', 1);
+      const privateKey = await WalletSdk.ExportAddressPrivateKey('filecoin', 1);
       setPrivateKey(`导出账户私钥--成功: ${privateKey}`);
 
       const signResult = await WalletSdk.Sign('filecoin', 0,JSON.stringify({
@@ -122,9 +81,6 @@ export default () => {
       <ScrollView style={{flex: 1}}>
         <View style={styles.wrap}>
           <View style={styles.btnGroup}>
-            <TouchableOpacity style={styles.btn} onPress={TestEth}>
-              <Text style={styles.btn_text}>eth 测试</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.btn} onPress={TestFil}>
               <Text style={styles.btn_text}>filecoin 测试</Text>
             </TouchableOpacity>

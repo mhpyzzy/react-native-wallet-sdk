@@ -1,9 +1,21 @@
 # react-native-wallet-sdk
 
-## yarn (npm) 安装
+## 一、 安装依赖
 
-`yarn add react-native-wallet-sdk`
+### 本地安装：
+在package.json --> dependencies 里直接添加： 
+```
+"dependencies": {
+  ...
+  "react-native-wallet-sdk": "file:../"
+}
 
+```
+然后 yarn install
+
+> 后期会发布到 npm
+
+## 二、
 ### ios
 ```
   $ cd ios
@@ -43,6 +55,14 @@ const seed = await WalletSdk.NewSeed(mnemonic, password)
  * @return Promise<string> 成功返回：‘ok’
 */
 const isOk = await WalletSdk.NewWallet(seed);
+
+/**
+ * @desc 设置密钥路径
+ * @params coin :string 
+ * @params path :string // 公钥的地址（此密钥需向客服索取）
+ * @return Promise<string> 成功返回：‘ok’
+*/
+const isOk = await await WalletSdk.SetHttpPublicKeysPath(coin, path);
 
 /**
  * @desc 设置钱包的节点URL 
